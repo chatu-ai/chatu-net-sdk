@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatUAISDK", "src\ChatUAISDK\ChatUAISDK.csproj", "{968E57C3-7C08-4C05-B9C8-87939BCFB6DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A724C06C-01D8-400B-9461-F4CFAEE93670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatUAISDK.Console", "src\ChatUAISDK.Console\ChatUAISDK.Console.csproj", "{E5A30A5A-196F-41BD-972A-B72138BAAA1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatUAISDK.Tests", "src\ChatUAISDK.Tests\ChatUAISDK.Tests.csproj", "{22C72943-AC8E-438B-820D-3601A78A7BE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{968E57C3-7C08-4C05-B9C8-87939BCFB6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{968E57C3-7C08-4C05-B9C8-87939BCFB6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{968E57C3-7C08-4C05-B9C8-87939BCFB6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{968E57C3-7C08-4C05-B9C8-87939BCFB6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A30A5A-196F-41BD-972A-B72138BAAA1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A30A5A-196F-41BD-972A-B72138BAAA1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A30A5A-196F-41BD-972A-B72138BAAA1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A30A5A-196F-41BD-972A-B72138BAAA1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C72943-AC8E-438B-820D-3601A78A7BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C72943-AC8E-438B-820D-3601A78A7BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C72943-AC8E-438B-820D-3601A78A7BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C72943-AC8E-438B-820D-3601A78A7BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5A30A5A-196F-41BD-972A-B72138BAAA1D} = {A724C06C-01D8-400B-9461-F4CFAEE93670}
+		{22C72943-AC8E-438B-820D-3601A78A7BE7} = {A724C06C-01D8-400B-9461-F4CFAEE93670}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F34483AC-327A-4464-9F3A-A7BF869C0AA4}
+	EndGlobalSection
+EndGlobal

@@ -33,7 +33,9 @@ public class ChatUAIClient
         {
             accessToken = _accessToken,
             prompt = request.Prompt,
-            conversationId = request.ConversationId
+            conversationId = request.ConversationId,
+            sceneId = (int) (request.SceneId ?? 0),
+            system = request.System,
         });
         var response =await client.PostAsync($"{_baseUrl}/chat/ask",
             new StringContent(json, Encoding.UTF8, "application/json"));
@@ -46,13 +48,14 @@ public class ChatUAIClient
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<ApiResult<StreamResponse>> StreamCreateAsync(AskRequest request)
+    public async Task<ApiResult<StreamResponse>> StreamCreateAsync(StreamCreateRequest request)
     {
         using var client = new HttpClient();
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
             prompt = request.Prompt,
+            sceneId = (int)(request.SceneId ?? 0),
             system = request.System,
             conversationId = request.ConversationId,
             useEscape = request.UseEscape

@@ -53,7 +53,8 @@ while (true)
         else if (mode == "2")
         {
             stopwatch.Start();
-            var streamCreateResponse = await client.StreamCreateAsync(new AskRequest
+            var streamCreateResponse = await client.StreamCreateAsync(
+                new StreamCreateRequest()
             {
                 Prompt = prompt,
                 ConversationId = conversationId,

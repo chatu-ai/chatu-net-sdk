@@ -12,7 +12,7 @@ var accessToken = "你的AccessToken";
 
 ```
 
-之后运行即可
+之后运行即可。
 
 ```
 AccessToken 请于 https://agent.chatu.ai 获取

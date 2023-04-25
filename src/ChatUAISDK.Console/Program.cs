@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using ChatUAISDK;
 using ChatUAISDK.Requests;
-var testApiUrl = "";
+var testApiUrl = "https://api.chatuapi.com";
+// AccessToken 请于 https://agent.chatu.ai 获取
 var accessToken = "";
 var client = new ChatUAIClient(testApiUrl, accessToken);
 
@@ -56,6 +57,8 @@ while (true)
             {
                 Prompt = prompt,
                 ConversationId = conversationId,
+                System = "使用标准Markdown回复，并支持Latex，Mermaid格式",
+                UseEscape = true
             });
             if (streamCreateResponse.Code == 0)
             {

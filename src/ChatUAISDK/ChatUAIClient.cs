@@ -20,9 +20,15 @@ public class ChatUAIClient
         _accessToken = accessToken;
     }
 
+    /// <summary>
+    /// 普通问答请求 ，由于此请求易超时，请设置多于5分钟的超时时间
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public async Task<ApiResult<AskResponse>> AskAsync(AskRequest request)
     {
         using var client = new HttpClient();
+        client.Timeout = TimeSpan.FromSeconds(10);
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
@@ -32,8 +38,14 @@ public class ChatUAIClient
         var response =await client.PostAsync($"{_baseUrl}/chat/ask",
             new StringContent(json, Encoding.UTF8, "application/json"));
         var text = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(text);
         return JsonConvert.DeserializeObject<ApiResult<AskResponse>>(text);
     }
+    /// <summary>
+    /// 创建流式输入请求
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public async Task<ApiResult<StreamResponse>> StreamCreateAsync(AskRequest request)
     {
         using var client = new HttpClient();
@@ -41,13 +53,21 @@ public class ChatUAIClient
         {
             accessToken = _accessToken,
             prompt = request.Prompt,
-            conversationId = request.ConversationId
+            system = request.System,
+            conversationId = request.ConversationId,
+            useEscape = request.UseEscape
         });
         var response = await client.PostAsync($"{_baseUrl}/chat/stream/create",
             new StringContent(json, Encoding.UTF8, "application/json"));
         var text = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ApiResult<StreamResponse>>(text);
     }
+    /// <summary>
+    /// 获取流式输出 ，如果前端请使用 EventSource
+    /// </summary>
+    /// <param name="streamId"></param>
+    /// <returns></returns>
+    /// <exception cref="HttpRequestException"></exception>
     public async IAsyncEnumerable<string> StreamAsync(Guid streamId)
     {
         using var client = new HttpClient();
@@ -77,7 +97,9 @@ public class ChatUAIClient
             //Console.WriteLine(line);
             if (line.StartsWith("data: "))
             {
-                line = line["data: ".Length..].Replace("\r", "\n");
+                line = line["data: ".Length..]
+                    .Replace("\r","\n")
+                    .Replace("<c-api-line>", "\n");
                 yield return line;
             }
 
@@ -86,5 +108,25 @@ public class ChatUAIClient
                continue;
             }
         }
+    }
+
+
+    /// <summary>
+    /// 返回消耗 Token 此 Token 为转换后的 ChatU Token
+    /// </summary>
+    /// <param name="streamId"></param>
+    /// <returns></returns>
+    public async Task<ApiResult<SyncResponse>> SyncAsync(Guid streamId)
+    {
+        using var client = new HttpClient();
+        var json = JsonConvert.SerializeObject(new
+        {
+            accessToken = _accessToken,
+            streamId
+        });
+        var response = await client.PostAsync($"{_baseUrl}/chat/stream/sync",
+            new StringContent(json, Encoding.UTF8, "application/json"));
+        var text = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<ApiResult<SyncResponse>>(text);
     }
 }

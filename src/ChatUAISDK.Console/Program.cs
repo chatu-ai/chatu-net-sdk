@@ -72,10 +72,10 @@ while (true)
             {
                 Console.WriteLine($"Error:{streamCreateResponse.Message}");
             }
-
-
             stopwatch.Stop();
             Console.WriteLine($"\t\t耗时：{stopwatch.ElapsedMilliseconds}ms");
+            var syncResult = await client.SyncAsync(streamCreateResponse.Data.StreamId);
+            Console.WriteLine($"消耗{syncResult.Data.Token},RequestId:{syncResult.Data.RequestId}");
         }
 
 

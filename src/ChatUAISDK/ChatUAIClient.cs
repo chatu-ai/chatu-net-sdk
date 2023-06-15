@@ -34,10 +34,10 @@ public class ChatUAIClient
             accessToken = _accessToken,
             prompt = request.Prompt,
             conversationId = request.ConversationId,
-            sceneId = (int) (request.SceneId ?? 0),
+            sceneId = (int)(request.SceneId ?? 0),
             system = request.System,
         });
-        var response =await client.PostAsync($"{_baseUrl}/chat/ask",
+        var response = await client.PostAsync($"{_baseUrl}/chat/ask",
             new StringContent(json, Encoding.UTF8, "application/json"));
         var text = await response.Content.ReadAsStringAsync();
         Console.WriteLine(text);
@@ -87,7 +87,7 @@ public class ChatUAIClient
         }
         await using var contentStream = await response.Content.ReadAsStreamAsync();
         using var reader = new System.IO.StreamReader(contentStream);
-        while (await reader.ReadLineAsync().ConfigureAwait(false) is { } line )
+        while (await reader.ReadLineAsync().ConfigureAwait(false) is { } line)
         {
             if (line.StartsWith("event: "))
             {
@@ -101,14 +101,14 @@ public class ChatUAIClient
             if (line.StartsWith("data: "))
             {
                 line = line["data: ".Length..]
-                    .Replace("\r","\n")
+                    .Replace("\r", "\n")
                     .Replace("<c-api-line>", "\n");
                 yield return line;
             }
 
             if (!string.IsNullOrWhiteSpace(line))
             {
-               continue;
+                continue;
             }
         }
     }
@@ -131,5 +131,51 @@ public class ChatUAIClient
             new StringContent(json, Encoding.UTF8, "application/json"));
         var text = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ApiResult<SyncResponse>>(text);
+    }
+
+    /// <summary>
+    /// 生成图片接口
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+
+    public async Task<ApiResult<CreateImageResponse>> CreateImageAsync(CreateImageRequest request)
+    {
+
+        using var client = new HttpClient();
+        client.Timeout = TimeSpan.FromSeconds(10);
+        var json = JsonConvert.SerializeObject(new
+        {
+            accessToken = _accessToken,
+            prompt = request.Prompt,
+            style = request.Style,
+            count = (int)(request.Count ?? 0),
+            promptOptimize = request.PromptOptimize
+        });
+        var response = await client.PostAsync($"{_baseUrl}/draw/createImage",
+            new StringContent(json, Encoding.UTF8, "application/json"));
+        var text = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(text);
+        return JsonConvert.DeserializeObject<ApiResult<CreateImageResponse>>(text);
+    }
+    /// <summary>
+    /// 获取图片地址接口
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public async Task<ApiResult<CheckResultResponse>> CheckResultAsync(CheckResultRequest request)
+    {
+        using var client = new HttpClient();
+        client.Timeout = TimeSpan.FromSeconds(10);
+        var json = JsonConvert.SerializeObject(new
+        {
+            accessToken = _accessToken,
+            requestId = request.RequestId
+        });
+        var response = await client.PostAsync($"{_baseUrl}/draw/checkResult",
+            new StringContent(json, Encoding.UTF8, "application/json"));
+        var text = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(text);
+        return JsonConvert.DeserializeObject<ApiResult<CheckResultResponse>>(text);
     }
 }

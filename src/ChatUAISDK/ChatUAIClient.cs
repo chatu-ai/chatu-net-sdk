@@ -141,21 +141,19 @@ public class ChatUAIClient
 
     public async Task<ApiResult<CreateImageResponse>> CreateImageAsync(CreateImageRequest request)
     {
-
         using var client = new HttpClient();
-        client.Timeout = TimeSpan.FromSeconds(10);
+        client.Timeout = TimeSpan.FromSeconds(15);
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
             prompt = request.Prompt,
             style = request.Style,
-            count = (int)(request.Count ?? 0),
+            count = (int)(request.Count ?? 1),
             promptOptimize = request.PromptOptimize
         });
         var response = await client.PostAsync($"{_baseUrl}/draw/createImage",
             new StringContent(json, Encoding.UTF8, "application/json"));
         var text = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(text);
         return JsonConvert.DeserializeObject<ApiResult<CreateImageResponse>>(text);
     }
     /// <summary>
@@ -166,7 +164,7 @@ public class ChatUAIClient
     public async Task<ApiResult<CheckResultResponse>> CheckResultAsync(CheckResultRequest request)
     {
         using var client = new HttpClient();
-        client.Timeout = TimeSpan.FromSeconds(10);
+        client.Timeout = TimeSpan.FromSeconds(15);
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
@@ -175,7 +173,6 @@ public class ChatUAIClient
         var response = await client.PostAsync($"{_baseUrl}/draw/checkResult",
             new StringContent(json, Encoding.UTF8, "application/json"));
         var text = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(text);
         return JsonConvert.DeserializeObject<ApiResult<CheckResultResponse>>(text);
     }
 }

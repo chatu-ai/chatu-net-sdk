@@ -47,14 +47,14 @@ jobs:
               uses: gittools/actions/gitversion/execute@v0.10.1
               with:
                   useConfigFile: true
-                  configFilePath: ./.github/workflows/gitVersion.yml
+                  configFilePath: ./.github/gitVersion.yml
             - name: Restore dependencies
               run: dotnet restore
             - name: Build dotnet
-              run: dotnet build   --configuration release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore
+              run: dotnet build  ./src/ChatUAISDK/ChatUAISDK.csproj  --configuration release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore
 
-            # - name: Build dotnet
-            #   run: dotnet build ./src/ChatUAISDK.Tests/ChatUAISDK.Tests.csproj  --configuration release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore
+            - name: Build dotnet
+              run: dotnet build ./src/ChatUAISDK.Tests/ChatUAISDK.Tests.csproj  --configuration release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore
 
             - name: Run Tests
               run: dotnet test --configuration Release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} --no-build --verbosity normal

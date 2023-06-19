@@ -53,12 +53,6 @@ jobs:
             - name: Build dotnet
               run: dotnet build  ./src/ChatUAISDK/ChatUAISDK.csproj  --configuration release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore
 
-            - name: Build dotnet
-              run: dotnet build ./src/ChatUAISDK.Tests/ChatUAISDK.Tests.csproj  --configuration release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore
-
-            - name: Run Tests
-              run: dotnet test  ./src/ChatUAISDK.Tests/ChatUAISDK.Tests.csproj --configuration Release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} --no-build --verbosity normal
-
             - name: Package nuget
               run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration release -o:${{ env.NuGetDirectory }} /p:PackageVersion=${{ steps.gitversion.outputs.AssemblySemVer }}
 
@@ -92,12 +86,6 @@ jobs:
             # using the --excluded-rules or --excluded-rule-ids option
             - name: Validate package
               run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.nupkg")
-            # - name: Publish NuGet package
-            #   run: |
-            #       foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-            #           dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
-            #       }
-
     run_test:
         runs-on: ubuntu-latest
         steps:

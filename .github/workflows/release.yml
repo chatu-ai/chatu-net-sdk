@@ -90,8 +90,8 @@ jobs:
             # https://www.nuget.org/packages/Meziantou.Framework.NuGetPackageValidation.Tool#readme-body-tab
             # If some rules are not applicable, you can disable them
             # using the --excluded-rules or --excluded-rule-ids option
-            # - name: Validate package
-            #   run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.nupkg")
+            - name: Validate package
+              run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.nupkg")
             # - name: Publish NuGet package
             #   run: |
             #       foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {

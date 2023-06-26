@@ -14,7 +14,7 @@
 	  <PackageIcon>icon.png</PackageIcon>
 	  <NoWarn>$(NoWarn);CS1591</NoWarn>
 	  <Description>A .net sdk of chatU api</Description>
-	  <PackageProjectUrl>https://www.chatu.pro</PackageProjectUrl>
+	  <PackageProjectUrl>http://www.chatu.pro</PackageProjectUrl>
 	  <PackageTags>sdk, library, client</PackageTags>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>

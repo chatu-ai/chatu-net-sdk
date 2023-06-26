@@ -14,11 +14,11 @@ dotnet add package ChatUAISDK --version 1.1.2
 
 ## Release Notes
 
-[x] 图片生成接口
-[x] 文本生成接口
-[x] 流式文本生成接口
-[x] 支持 GPT-4
-[x] 支持 GPT-3.5
+- [x] 图片生成接口
+- [x] 文本生成接口
+- [x] 流式文本生成接口
+- [x] 支持 GPT-4
+- [x] 支持 GPT-3.5
 
 
 ## Demo

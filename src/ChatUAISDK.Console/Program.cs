@@ -2,8 +2,18 @@
 using ChatUAISDK;
 using ChatUAISDK.Requests;
 var testApiUrl = "https://api.chatuapi.com";
-// AccessToken 请于 https://agent.chatu.ai 获取
-var accessToken = "";
+// AccessToken 请于 https://admin.chatu.pro 获取
+string? accessToken = null;
+if (args.Length == 0)
+{
+    Console.WriteLine("请输入AccessToken");
+    accessToken = Console.ReadLine();
+}
+else
+{
+    accessToken = args[0]; // "your access token";
+}
+
 var client = new ChatUAIClient(testApiUrl, accessToken);
 
 var stopwatch = new Stopwatch();

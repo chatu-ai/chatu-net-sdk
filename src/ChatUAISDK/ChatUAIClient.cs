@@ -148,7 +148,7 @@ public class ChatUAIClient
             accessToken = _accessToken,
             prompt = request.Prompt,
             style = request.Style,
-            count = (int)(request.Count ?? 1),
+            count = request.Count ?? 1,
             promptOptimize = request.PromptOptimize
         });
         var response = await client.PostAsync($"{_baseUrl}/draw/createImage",

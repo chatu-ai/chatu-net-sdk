@@ -122,14 +122,8 @@ jobs:
                       dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
                   }
                   if ($env:GITHUB_REF -eq 'refs/heads/main') {
-                        # 判断如果tag为v开头
-                        if ($env:GITHUB_REF -like 'refs/tags/v*') {
-                            # 获取tag
-                            $tag = $env:GITHUB_REF.Replace('refs/tags/', '')
-                            # 发布到nuget
-                            dotnet nuget push ${{ env.NuGetDirectory }}/*.nupkg --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
-                            # 发布到github
-                            dotnet nuget push ${{ env.NuGetDirectory }}/*.nupkg --api-key "${{ secrets.GITHUB_TOKEN }}" --source https://nuget.pkg.github.com/ChatUAISDK/index.json --skip-duplicate
-                        }
-                    }
+                      foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
+                          dotnet nuget push $file --api-key "${{ secrets.TEST_CHATU_NUGET_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+                      }
+                  }
 

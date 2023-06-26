@@ -122,7 +122,7 @@ jobs:
                       dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
                   }
                   write $env:GITHUB_REF
-                  write ${{ secrets.TEST_CHATU_NUGET_KEY }}
+                  write "${{ secrets.TEST_CHATU_NUGET_KEY }}"
                   if ($env:GITHUB_REF -eq 'refs/heads/main') {
                       foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
                           dotnet nuget push $file --api-key "${{ secrets.TEST_CHATU_NUGET_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

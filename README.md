@@ -1,5 +1,8 @@
 # ChatU.AI.SDK
 
+![Nuget](https://img.shields.io/nuget/v/ChatU.AI.SDK)
+
+
 ## SDK
 
 您如果使用 SDK 则通过 NuGet 进行安装：`ChatU.AI.SDK`
@@ -9,7 +12,7 @@
 Install-Package ChatU.AI.SDK -Version 1.1.2
 ```
 ```ps
-dotnet add package ChatUAISDK --version 1.1.2
+dotnet add package ChatU.AI.SDK --version 1.1.2
 ```
 
 ## Release Notes

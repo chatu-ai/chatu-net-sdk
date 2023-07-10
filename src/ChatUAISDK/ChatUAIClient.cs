@@ -36,6 +36,11 @@ public class ChatUAIClient
             conversationId = request.ConversationId,
             sceneId = (int)(request.SceneId ?? 0),
             system = request.System,
+            model=request.Model,
+            maxTokens=request.MaxTokens,
+            textVerficationLevel=request.TextVerificationLevel,
+            temprature=request.Temperature,
+            assitantId=request.AssistantId
         });
         var response = await client.PostAsync($"{_baseUrl}/chat/ask",
             new StringContent(json, Encoding.UTF8, "application/json"));
@@ -43,6 +48,7 @@ public class ChatUAIClient
         Console.WriteLine(text);
         return JsonConvert.DeserializeObject<ApiResult<AskResponse>>(text);
     }
+
     /// <summary>
     /// 创建流式输入请求
     /// </summary>
@@ -58,7 +64,12 @@ public class ChatUAIClient
             sceneId = (int)(request.SceneId ?? 0),
             system = request.System,
             conversationId = request.ConversationId,
-            useEscape = request.UseEscape
+            useEscape = request.UseEscape,
+            model=request.Model,
+            maxTokens=request.MaxTokens,
+            textVerificationLevel=request.TextVerificationLevel,
+            temperature=request.Temperature,
+            assitantId=request.AssistantId
         });
         var response = await client.PostAsync($"{_baseUrl}/chat/stream/create",
             new StringContent(json, Encoding.UTF8, "application/json"));
@@ -174,5 +185,22 @@ public class ChatUAIClient
             new StringContent(json, Encoding.UTF8, "application/json"));
         var text = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ApiResult<CheckResultResponse>>(text);
+    }
+    /// <summary>
+    /// 获取当前AccessToken的信息
+    /// </summary>
+    /// <param name="streamId"></param>
+    /// <returns></returns>
+    public async Task<ApiResult<TokenInfoResponse>> TokenInfoAsync()
+    {
+        using var client = new HttpClient();
+        var json = JsonConvert.SerializeObject(new
+        {
+            accessToken = _accessToken,
+        });
+        var response = await client.PostAsync($"{_baseUrl}/account/key/info",
+            new StringContent(json, Encoding.UTF8, "application/json"));
+        var text = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<ApiResult<TokenInfoResponse>>(text);
     }
 }

@@ -33,6 +33,8 @@ jobs:
           source-url: https://api.nuget.org/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.TEST_CHATU_NUGET_KEY}}
+      - name: Install dependencies
+        run: dotnet restore
       - run: dotnet build  ./src/ChatUAISDK/ChatUAISDK.csproj  --configuration release
       - name: Create the package
         run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration release 

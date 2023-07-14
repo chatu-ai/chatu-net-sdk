@@ -33,15 +33,17 @@ jobs:
           source-url: https://api.nuget.org/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.TEST_CHATU_NUGET_KEY}}
-      - name: Get tag version
-        run: |
-          TAG=$(git describe --tags --abbrev=0)
-          VERSION=${TAG//v}
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/v}
+      
+      - name: Display the version
+        run: echo ${{ steps.get_version.outputs.VERSION }}
       - name: Install dependencies
         run: dotnet restore
-      - run: dotnet build  ./src/ChatUAISDK/ChatUAISDK.csproj  --configuration Release /p:Version=$VERSION
+      - run: dotnet build  ./src/ChatUAISDK/ChatUAISDK.csproj  --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }}
       - name: Create the package
-        run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration Release  /p:Version=$VERSION
+        run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration Release  /p:Version=${{ steps.get_version.outputs.VERSION }}
       - name: Publish the package to GPR
         run: dotnet nuget push ./src/ChatUAISDK/bin/Release/*.nupkg --skip-duplicate
 

@@ -30,12 +30,12 @@ jobs:
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x' # SDK Version to use.
-          source-url: https://nuget.pkg.github.com/<owner>/index.json
+          source-url: https://api.nuget.org/v3/index.json
         env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: dotnet build  ./src/ChatUAISDK/ChatUAISDK.csproj  --configuration release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore
+          NUGET_AUTH_TOKEN: ${{secrets.TEST_CHATU_NUGET_KEY}}
+      - run: dotnet build  ./src/ChatUAISDK/ChatUAISDK.csproj  --configuration release
       - name: Create the package
-        run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration release -o:${{ env.NuGetDirectory }} /p:PackageVersion=${{ steps.gitversion.outputs.AssemblySemVer }}
+        run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration release 
       - name: Publish the package to GPR
-        run: dotnet nuget push ./src/ChatUAISDK/bin/Release/*.nupkg  --api-key "${{ secrets.TEST_CHATU_NUGET_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ./src/ChatUAISDK/bin/Release/*.nupkg --skip-duplicate
 

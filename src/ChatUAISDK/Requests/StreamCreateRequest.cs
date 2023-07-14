@@ -50,7 +50,7 @@ public class StreamCreateRequest
     ///参数范围(0.00,2.00)
     ///默认值0.9
     /// </summary>
-    public float Temperature { get; set; }
+    public float? Temperature { get; set; } 
     /// <summary>
     /// 使用的AI助手ID
     /// </summary>

@@ -36,11 +36,11 @@ public class ChatUAIClient
             conversationId = request.ConversationId,
             sceneId = (int)(request.SceneId ?? 0),
             system = request.System,
-            model=request.Model,
-            maxTokens=request.MaxTokens,
-            textVerficationLevel=request.TextVerificationLevel,
-            temprature=request.Temperature,
-            assitantId=request.AssistantId
+            model = request.Model,
+            maxTokens = request.MaxTokens,
+            textVerficationLevel = request.TextVerificationLevel,
+            temprature = request.Temperature,
+            assitantId = request.AssistantId
         });
         var response = await client.PostAsync($"{_baseUrl}/chat/ask",
             new StringContent(json, Encoding.UTF8, "application/json"));

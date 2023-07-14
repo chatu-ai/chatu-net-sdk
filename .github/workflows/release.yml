@@ -16,9 +16,6 @@ on:
     release:
         types:
             - published # Run the workflow when a new GitHub release is published
-defaults:
-    run:
-        shell: pwsh
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -36,7 +33,6 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/v}
-      
       - name: Display the version
         run: echo ${{ steps.get_version.outputs.VERSION }}
       - name: Install dependencies

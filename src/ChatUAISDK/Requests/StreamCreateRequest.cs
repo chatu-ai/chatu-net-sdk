@@ -54,6 +54,6 @@ public class StreamCreateRequest
     /// <summary>
     /// 使用的AI助手ID
     /// </summary>
-    public int? AssistantId { get; set; }
+    public Guid? AssistantId { get; set; }
 
 }

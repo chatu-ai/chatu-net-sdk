@@ -65,11 +65,11 @@ public class ChatUAIClient
             system = request.System,
             conversationId = request.ConversationId,
             useEscape = request.UseEscape,
-            model=request.Model,
-            maxTokens=request.MaxTokens,
-            textVerificationLevel=request.TextVerificationLevel,
-            temperature=request.Temperature,
-            assitantId=request.AssistantId
+            model = request.Model,
+            maxTokens = request.MaxTokens,
+            textVerificationLevel = request.TextVerificationLevel,
+            temperature = request.Temperature,
+            assitantId = request.AssistantId
         });
         var response = await client.PostAsync($"{_baseUrl}/chat/stream/create",
             new StringContent(json, Encoding.UTF8, "application/json"));

@@ -41,5 +41,5 @@ jobs:
       - name: Create the package
         run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration Release  /p:Version=${{ steps.get_version.outputs.VERSION }}
       - name: Publish the package to GPR
-        run: dotnet nuget push ./src/ChatUAISDK/bin/Release/*.nupkg --skip-duplicate
+        run: dotnet nuget push ./src/ChatUAISDK/bin/Release/*.nupkg --api-key ${{secrets.TEST_CHATU_NUGET_KEY}} --skip-duplicate
 

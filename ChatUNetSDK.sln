@@ -13,7 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatUAISDK.Tests", "src\Cha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{F9758052-E0DD-4811-BD2C-6B34B2B3F8FB}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		.github\gitVersion.yml = .github\gitVersion.yml
 		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
@@ -40,6 +41,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{E5A30A5A-196F-41BD-972A-B72138BAAA1D} = {A724C06C-01D8-400B-9461-F4CFAEE93670}
 		{22C72943-AC8E-438B-820D-3601A78A7BE7} = {A724C06C-01D8-400B-9461-F4CFAEE93670}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

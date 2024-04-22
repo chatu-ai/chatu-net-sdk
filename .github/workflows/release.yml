@@ -1,13 +1,9 @@
 name: publish
-
 on:
     workflow_dispatch: # Allow running the workflow manually from the GitHub UI
     push:
         tags:
             - 'v[0-9]+.[0-9]+.[0-9]+'
-        branches:
-            - 'feature/zoe-actions' # Run the workflow when pushing to the main branch
-            - 'main'
         paths:
             - 'src/**'
     pull_request:
@@ -41,5 +37,5 @@ jobs:
       - name: Create the package
         run: dotnet pack ./src/ChatUAISDK/ChatUAISDK.csproj   --configuration Release  /p:Version=${{ steps.get_version.outputs.VERSION }}
       - name: Publish the package to GPR
-        run: dotnet nuget push ./src/ChatUAISDK/bin/Release/*.nupkg --skip-duplicate
+        run: dotnet nuget push ./src/ChatUAISDK/bin/Release/*.nupkg --skip-duplicate -k ${{secrets.TEST_CHATU_NUGET_KEY}}
 

@@ -1,10 +1,9 @@
-﻿namespace ChatUAISDK.Requests
+﻿namespace ChatUAISDK.Requests;
+
+public class TokenInfoRequest
 {
-    public class TokenInfoRequest
-    {
-        /// <summary>
-        /// 授权所用的AccessToen
-        /// </summary>
-        public string AccessToken { get; set; }
-    }
+    /// <summary>
+    /// en: AccessToken used for authorization
+    /// </summary>
+    public string AccessToken { get; set; }
 }

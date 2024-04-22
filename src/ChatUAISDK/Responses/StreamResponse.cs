@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace ChatUAISDK.Responses
+namespace ChatUAISDK.Responses;
+
+public class StreamResponse
 {
-    public class StreamResponse
-    {
-        public Guid StreamId { get; set; }
-        public Guid ConversationId { get; set; }
-    }
+    public Guid StreamId { get; set; }
+    public Guid ConversationId { get; set; }
 }

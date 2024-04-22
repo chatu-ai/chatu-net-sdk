@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ChatUAISDK.Requests;
-using ChatUAISDK.Responses;
-using Newtonsoft.Json;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using ChatUAISDK.Requests;
+using ChatUAISDK.Responses;
+using Newtonsoft.Json;
 
 namespace ChatUAISDK;
 
@@ -21,7 +22,7 @@ public class ChatUAIClient
     }
 
     /// <summary>
-    /// 普通问答请求 ，由于此请求易超时，请设置多于5分钟的超时时间
+    /// Normal Q&amp;A request, due to the request is easy to timeout, please set a timeout time more than 5 minutes
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
@@ -34,7 +35,7 @@ public class ChatUAIClient
             accessToken = _accessToken,
             prompt = request.Prompt,
             conversationId = request.ConversationId,
-            sceneId = (int)(request.SceneId ?? 0),
+            sceneId = (int) (request.SceneId ?? 0),
             system = request.System,
             model = request.Model,
             maxTokens = request.MaxTokens,
@@ -50,7 +51,7 @@ public class ChatUAIClient
     }
 
     /// <summary>
-    /// 创建流式输入请求
+    ///     Create a stream input request
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
@@ -61,7 +62,7 @@ public class ChatUAIClient
         {
             accessToken = _accessToken,
             prompt = request.Prompt,
-            sceneId = (int)(request.SceneId ?? 0),
+            sceneId = (int) (request.SceneId ?? 0),
             system = request.System,
             conversationId = request.ConversationId,
             useEscape = request.UseEscape,
@@ -76,8 +77,9 @@ public class ChatUAIClient
         var text = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ApiResult<StreamResponse>>(text);
     }
+
     /// <summary>
-    /// 获取流式输出 ，如果前端请使用 EventSource
+    ///     Get stream output, if you are using front-end, please use EventSource
     /// </summary>
     /// <param name="streamId"></param>
     /// <returns></returns>
@@ -96,18 +98,17 @@ public class ChatUAIClient
                 $"StreamAsync Failed! HTTP status code: {response.StatusCode} | Response body: {responseAsString}",
                 null, response.StatusCode);
         }
+
         await using var contentStream = await response.Content.ReadAsStreamAsync();
-        using var reader = new System.IO.StreamReader(contentStream);
+        using var reader = new StreamReader(contentStream);
         while (await reader.ReadLineAsync().ConfigureAwait(false) is { } line)
         {
             if (line.StartsWith("event: "))
             {
                 var evt = line["event: ".Length..].Trim();
-                if (evt == "close")
-                {
-                    break;
-                }
+                if (evt == "close") break;
             }
+
             //Console.WriteLine(line);
             if (line.StartsWith("data: "))
             {
@@ -117,16 +118,13 @@ public class ChatUAIClient
                 yield return line;
             }
 
-            if (!string.IsNullOrWhiteSpace(line))
-            {
-                continue;
-            }
+            if (!string.IsNullOrWhiteSpace(line)) continue;
         }
     }
 
 
     /// <summary>
-    /// 返回消耗 Token 此 Token 为转换后的 ChatU Token
+    /// Return the consumed token, this token is the ChatU token after conversion
     /// </summary>
     /// <param name="streamId"></param>
     /// <returns></returns>
@@ -145,11 +143,10 @@ public class ChatUAIClient
     }
 
     /// <summary>
-    /// 生成图片接口
+    /// Generate image API
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-
     public async Task<ApiResult<CreateImageResponse>> CreateImageAsync(CreateImageRequest request)
     {
         using var client = new HttpClient();
@@ -167,8 +164,9 @@ public class ChatUAIClient
         var text = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ApiResult<CreateImageResponse>>(text);
     }
+
     /// <summary>
-    /// 获取图片地址接口
+    ///     Get image URL
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
@@ -186,17 +184,16 @@ public class ChatUAIClient
         var text = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ApiResult<CheckResultResponse>>(text);
     }
+
     /// <summary>
-    /// 获取当前AccessToken的信息
+    ///     Get the information of the current AccessToken
     /// </summary>
-    /// <param name="streamId"></param>
-    /// <returns></returns>
     public async Task<ApiResult<TokenInfoResponse>> TokenInfoAsync()
     {
         using var client = new HttpClient();
         var json = JsonConvert.SerializeObject(new
         {
-            accessToken = _accessToken,
+            accessToken = _accessToken
         });
         var response = await client.PostAsync($"{_baseUrl}/account/key/info",
             new StringContent(json, Encoding.UTF8, "application/json"));

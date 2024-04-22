@@ -2,11 +2,11 @@
 using ChatUAISDK;
 using ChatUAISDK.Requests;
 var testApiUrl = "https://api.chatuapi.com";
-// AccessToken 请于 https://admin.chatu.pro 获取
-string? accessToken = null;
+//  AccessToken is available at https://admin.chatu.pro
+string? accessToken;
 if (args.Length == 0)
 {
-    Console.WriteLine("请输入AccessToken");
+    Console.WriteLine("Please input AccessToken");
     accessToken = Console.ReadLine();
 }
 else
@@ -19,9 +19,9 @@ var client = new ChatUAIClient(testApiUrl, accessToken);
 var stopwatch = new Stopwatch();
 while (true)
 {
-    Console.WriteLine("使用哪种模式\n1，普通模式\n2，流试访问");
+    Console.WriteLine("Which mode to use\n1, Normal mode\n2, Stream mode");
     var mode = Console.ReadLine();
-    Console.WriteLine("是否使用会话[Y/N]");
+    Console.WriteLine("Whether to use conversation[Y/N]");
     var isConversationId = Console.ReadLine();
     Guid? conversationId = null;
     if (isConversationId == "Y")
@@ -32,7 +32,7 @@ while (true)
     while (true)
     {
 
-        Console.Write("您：\t");
+        Console.Write("You：\t");
         var prompt = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(prompt))
         {
@@ -58,7 +58,7 @@ while (true)
             }
 
             stopwatch.Stop();
-            Console.WriteLine($"\t\t耗时：{stopwatch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"\t\tTime:{stopwatch.ElapsedMilliseconds}ms");
         }
         else if (mode == "2")
         {
@@ -68,7 +68,7 @@ while (true)
             {
                 Prompt = prompt,
                 ConversationId = conversationId,
-                System = "使用标准Markdown回复，并支持Latex，Mermaid格式",
+                System = "Reply in standard Markdown and support Latex, Mermaid format",
                 UseEscape = true
             });
             if (streamCreateResponse.Code == 0)
@@ -83,11 +83,9 @@ while (true)
                 Console.WriteLine($"Error:{streamCreateResponse.Message}");
             }
             stopwatch.Stop();
-            Console.WriteLine($"\t\t耗时：{stopwatch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"\t\tTime：{stopwatch.ElapsedMilliseconds}ms");
             var syncResult = await client.SyncAsync(streamCreateResponse.Data.StreamId);
-            Console.WriteLine($"消耗{syncResult.Data.Token},RequestId:{syncResult.Data.RequestId}");
+            Console.WriteLine($"Cost {syncResult.Data.Token},RequestId:{syncResult.Data.RequestId}");
         }
-
-
     }
 }

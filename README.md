@@ -5,9 +5,9 @@
 
 ## SDK
 
-您如果使用 SDK 则通过 NuGet 进行安装：`ChatU.AI.SDK`
+If you use SDK, you can install it via NuGet: `ChatU.AI.SDK`
+Or execute the command
 
-或通过命令执行
 ```ps
 Install-Package ChatU.AI.SDK -Version 1.1.2
 ```
@@ -17,31 +17,33 @@ dotnet add package ChatU.AI.SDK --version 1.1.2
 
 ## Release Notes
 
-- [x] 图片生成接口
-- [x] 文本生成接口
-- [x] 流式文本生成接口
-- [x] 支持 GPT-4
-- [x] 支持 GPT-3.5
+- [x] Image generation interface
+- [x] Text generation interface
+- [x] Streaming text generation interface
+- [x] Allow all background configuration models
+- [x] Allow call assistant
 
 
 ## Demo
 
-ChatUAISDK.Console 是命令行示例
+ChatUAISDK.Console is a command line example
 
-## 使用方法
+## How to run a demo 
 
-修改 ChatUAISDK.Console  的 Program.cs 文件中的配置
+Modify the configuration in the Program.cs file of ChatUAISDK.Console
 
 ```csharp
 
-var accessToken = "你的AccessToken"; // 或在运行中直接填写
+var accessToken = "Your AccessToken"; // Or fill in directly during operation
 
 ```
 
-之后运行即可。
+After that, you can run it.
 
 ```
-AccessToken 请于 https://admin.chatu.pro (Global version:https://admin.chatu.ai) 获取
+AccessToken can be obtained from https://admin.chatu.pro (Global version:https://admin.chatu.ai)
 ```
+
+
 
 ![chatu-net-sdk-demo](https://user-images.githubusercontent.com/274085/234198322-3b042329-1ad8-4450-9595-3cde9864962b.gif)

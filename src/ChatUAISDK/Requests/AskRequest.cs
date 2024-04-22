@@ -5,52 +5,66 @@ namespace ChatUAISDK.Requests;
 public class AskRequest
 {
     /// <summary>
-    /// 提示词
+    ///     prompt
     /// </summary>
     public string Prompt { get; set; }
+
     /// <summary>
-    /// 会话 Id
+    ///     conversation Id
     /// </summary>
     public Guid? ConversationId { get; set; }
+
     /// <summary>
-    /// 模型(支持参数:gpt-3.5 gpt4.0 gpt-3.5-16k)
+    ///     model (eg: gpt-3.5 gpt4.0)
     /// </summary>
     public string Model { get; set; }
+
     /// <summary>
-    /// 用于切换GPT-3.5或GPT-4
+    ///     Obsolete : Used to switch between GPT-3.5 or GPT-4.
+    ///     use Model instead.
     /// </summary>
     [Obsolete("SceneId is obsolete. Use Model  instead.", false)]
     public ChatSceneType? SceneId { get; set; }
+
     /// <summary>
-    /// 系统设定
+    ///     system prompt
     /// </summary>
     public string System { get; set; }
+
     /// <summary>
-    /// 生成内容Token上限
-    /// >0的整数，限制生成文字的Token
-    /// 此Token为3.5或4的原生Token，而非计费Token
-    /// 3.5 最多支持4096，4最多8192
+    ///     en: The maximum number of tokens generated
+    ///     > 0 integer, limit the number of tokens generated
+    ///     this token is the native token of model, not the credits
+    ///     eg : 4.0 supports up to 8192
     /// </summary>
     public int? MaxTokens { get; set; }
+
     /// <summary>
-    /// 文本验证级别
-    /// 取值 ：0，1，2
-    /// 0 或 不传：不验证传入文本
-    ///1：宽松文本验证
-    ///2：严格文本验证
+    ///     Text verification level
+    ///     values: 0, 1, 2
+    ///     0 or not passed: no text verification
+    ///     1 : loose text verification
+    ///     2 : strict text verification
+    ///     9 : super strict text verification
     /// </summary>
     public int? TextVerificationLevel { get; set; }
+
     /// <summary>
-    /// 控制temperature参数
-    ///参数范围(0.00,2.00)
-    ///默认值0.9
+    ///     Controls randomness in boltzmann sampling.
+    ///     Lower temperature results in less randomness.
+    ///     As the temperature approaches zero, the model will become deterministic and repetitive.
+    ///     Higher temperature results in more randomness.
+    ///     Range: (0.00, 2.00)
+    ///     Default Value: 0.9
     /// </summary>
     public float? Temperature { get; set; }
 
-
+    public double? TopP { get; set; }
+    public double? PresencePenalty { get; set; }
+    public double? FrequencyPenalty { get; set; }
 
     /// <summary>
-    /// 使用的AI助手ID
+    ///     Assistant ID
     /// </summary>
     public Guid? AssistantId { get; set; }
 }

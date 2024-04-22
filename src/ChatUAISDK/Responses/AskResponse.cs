@@ -1,24 +1,36 @@
 ﻿using System;
 
-namespace ChatUAISDK.Responses
+namespace ChatUAISDK.Responses;
+
+public class AskResponse
 {
-    public class AskResponse
-    {
-        /// <summary>
-        /// 问题
-        /// </summary>
-        public string Answer { get; set; }
-        /// <summary>
-        /// 会话ID 如果之前未传递，则会新生成一个
-        /// </summary>
-        public Guid? ConversationId { get; set; }
-        /// <summary>
-        /// 当前问答消耗的Token
-        /// </summary>
-        public long Token { get; set; }
-        /// <summary>
-        /// 返回当前调用所使用的模型
-        /// </summary>
-        public string Model { get; set; }
-    }
+    /// <summary>
+    /// Generate content
+    /// </summary>
+    public string Answer { get; set; }
+
+    /// <summary>
+    /// Conversation ID If not passed before, a new one will be generated
+    /// </summary>
+    public Guid? ConversationId { get; set; }
+
+    /// <summary>
+    ///     Current credits
+    /// </summary>
+    public long Token { get; set; }
+
+    /// <summary>
+    /// Return the model currently used by the current call
+    /// </summary>
+    public string Model { get; set; }
+
+    /// <summary>
+    ///     Current credits
+    /// </summary>
+    public long Credits { get; set; }
+
+    /// <summary>
+    ///     Request id of the current request
+    /// </summary>
+    public Guid? RequestId { get; set; }
 }

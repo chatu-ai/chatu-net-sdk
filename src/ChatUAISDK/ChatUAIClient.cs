@@ -41,7 +41,7 @@ public class ChatUAIClient
             maxTokens = request.MaxTokens,
             textVerficationLevel = request.TextVerificationLevel,
             temprature = request.Temperature,
-            assitantId = request.AssistantId
+            assistantId = request.AssistantId
         });
         var response = await client.PostAsync($"{_baseUrl}/chat/ask",
             new StringContent(json, Encoding.UTF8, "application/json"));
@@ -70,7 +70,7 @@ public class ChatUAIClient
             maxTokens = request.MaxTokens,
             textVerificationLevel = request.TextVerificationLevel,
             temperature = request.Temperature,
-            assitantId = request.AssistantId
+            assistantId = request.AssistantId
         });
         var response = await client.PostAsync($"{_baseUrl}/chat/stream/create",
             new StringContent(json, Encoding.UTF8, "application/json"));

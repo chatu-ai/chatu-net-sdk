@@ -13,6 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatUAISDK.Tests", "src\Cha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{F9758052-E0DD-4811-BD2C-6B34B2B3F8FB}"
 	ProjectSection(SolutionItems) = preProject
+		ChatUNetSDK.sln.DotSettings = ChatUNetSDK.sln.DotSettings
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 		.github\gitVersion.yml = .github\gitVersion.yml
 		.github\workflows\release.yml = .github\workflows\release.yml

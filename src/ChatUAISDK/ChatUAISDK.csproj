@@ -3,6 +3,9 @@
   <PropertyGroup>
 
 	  <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <EnablePackageValidation>true</EnablePackageValidation>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>

@@ -7,7 +7,7 @@ public class AskResponse
     /// <summary>
     /// Generate content
     /// </summary>
-    public string Answer { get; set; }
+    public string Answer { get; set; } = null!;
 
     /// <summary>
     /// Conversation ID If not passed before, a new one will be generated
@@ -22,7 +22,7 @@ public class AskResponse
     /// <summary>
     /// Return the model currently used by the current call
     /// </summary>
-    public string Model { get; set; }
+    public string Model { get; set; } = null!;
 
     /// <summary>
     ///     Current credits

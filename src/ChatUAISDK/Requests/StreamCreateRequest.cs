@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace ChatUAISDK.Requests;
+﻿namespace ChatUAISDK.Requests;
 
 public class StreamCreateRequest
 {
     /// <summary>
     ///     提示词
     /// </summary>
-    public string Prompt { get; set; }
+    public string Prompt { get; set; } = null!;
 
     /// <summary>
     ///     会话 Id
@@ -17,7 +15,7 @@ public class StreamCreateRequest
     /// <summary>
     ///     模型(支持参数:gpt-3.5 gpt4.0 gpt-3.5-16k)
     /// </summary>
-    public string Model { get; set; }
+    public string? Model { get; set; }
 
     /// <summary>
     ///     用于切换GPT-3.5或GPT-4
@@ -28,7 +26,7 @@ public class StreamCreateRequest
     /// <summary>
     ///     系统设定
     /// </summary>
-    public string System { get; set; }
+    public string? System { get; set; }
 
     /// <summary>
     ///     如设置为true 则会将 \n 以 &lt;c-api-line&gt;返回，此选项仅stream/create生效

@@ -21,7 +21,7 @@ public class ChatUAIClient
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<ApiResult<AskResponse>> AskAsync(AskRequest request)
+    public async Task<ApiResult<AskResponse>?> AskAsync(AskRequest request)
     {
         using var client = new HttpClient();
         client.Timeout = TimeSpan.FromSeconds(300); 
@@ -30,7 +30,6 @@ public class ChatUAIClient
             accessToken = _accessToken,
             prompt = request.Prompt,
             conversationId = request.ConversationId,
-            sceneId = (int) (request.SceneId ?? 0),
             system = request.System,
             model = request.Model,
             maxTokens = request.MaxTokens,
@@ -51,7 +50,7 @@ public class ChatUAIClient
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<ApiResult<StreamResponse>> StreamCreateAsync(StreamCreateRequest request)
+    public async Task<ApiResult<StreamResponse>?> StreamCreateAsync(StreamCreateRequest request)
     {
         using var client = new HttpClient();
 
@@ -60,7 +59,6 @@ public class ChatUAIClient
         {
             accessToken = _accessToken,
             prompt = request.Prompt,
-            sceneId = (int) (request.SceneId ?? 0),
             system = request.System,
             conversationId = request.ConversationId,
             useEscape = request.UseEscape,
@@ -117,8 +115,7 @@ public class ChatUAIClient
                     .Replace("<c-api-line>", "\n");
                 yield return line;
             }
-
-            if (!string.IsNullOrWhiteSpace(line)) continue;
+             
         }
     }
 
@@ -128,7 +125,7 @@ public class ChatUAIClient
     /// </summary>
     /// <param name="streamId"></param>
     /// <returns></returns>
-    public async Task<ApiResult<SyncResponse>> SyncAsync(Guid streamId)
+    public async Task<ApiResult<SyncResponse>?> SyncAsync(Guid streamId)
     {
         using var client = new HttpClient();
 
@@ -149,7 +146,7 @@ public class ChatUAIClient
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<ApiResult<CreateImageResponse>> CreateImageAsync(CreateImageRequest request)
+    public async Task<ApiResult<CreateImageResponse>?> CreateImageAsync(CreateImageRequest request)
     {
         using var client = new HttpClient();
         client.Timeout = TimeSpan.FromSeconds(150);
@@ -172,7 +169,7 @@ public class ChatUAIClient
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<ApiResult<CheckResultResponse>> CheckResultAsync(CheckResultRequest request)
+    public async Task<ApiResult<CheckResultResponse>?> CheckResultAsync(CheckResultRequest request)
     {
         using var client = new HttpClient();
         client.Timeout = TimeSpan.FromSeconds(150);
@@ -190,7 +187,7 @@ public class ChatUAIClient
     /// <summary>
     ///     Get the information of the current AccessToken
     /// </summary>
-    public async Task<ApiResult<TokenInfoResponse>> TokenInfoAsync()
+    public async Task<ApiResult<TokenInfoResponse>?> TokenInfoAsync()
     {
         using var client = new HttpClient();
         var json = JsonConvert.SerializeObject(new

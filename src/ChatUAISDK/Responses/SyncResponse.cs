@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChatUAISDK.Responses;
+﻿namespace ChatUAISDK.Responses;
 
 public class SyncResponse
 {

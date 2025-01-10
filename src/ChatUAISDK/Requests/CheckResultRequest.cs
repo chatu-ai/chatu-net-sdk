@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChatUAISDK.Requests;
+﻿namespace ChatUAISDK.Requests;
 
 public class CheckResultRequest
 {

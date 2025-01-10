@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace ChatUAISDK.Requests;
+﻿namespace ChatUAISDK.Requests;
 
 public class AskRequest
 {
     /// <summary>
     ///     prompt
     /// </summary>
-    public string Prompt { get; set; }
+    public string Prompt { get; set; } = null!;
 
     /// <summary>
     ///     conversation Id
@@ -17,19 +15,19 @@ public class AskRequest
     /// <summary>
     ///     model (eg: gpt-3.5 gpt4.0)
     /// </summary>
-    public string Model { get; set; }
+    public string? Model { get; set; }
 
     /// <summary>
     ///     Obsolete : Used to switch between GPT-3.5 or GPT-4.
     ///     use Model instead.
     /// </summary>
-    [Obsolete("SceneId is obsolete. Use Model  instead.", false)]
+    [Obsolete("SceneId is obsolete. Use Model  instead.", true)]
     public ChatSceneType? SceneId { get; set; }
 
     /// <summary>
     ///     system prompt
     /// </summary>
-    public string System { get; set; }
+    public string? System { get; set; }
 
     /// <summary>
     ///     en: The maximum number of tokens generated

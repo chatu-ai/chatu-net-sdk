@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 
-	  <TargetFramework>net6.0</TargetFramework>
+	  <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <EnablePackageValidation>true</EnablePackageValidation>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -21,7 +21,7 @@
   <ItemGroup>
     <None Include="../../icon.png" Pack="true" PackagePath="\" Visible="false" />
     <None Include="../../README.md" Pack="true" PackagePath="" />
-    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.25">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

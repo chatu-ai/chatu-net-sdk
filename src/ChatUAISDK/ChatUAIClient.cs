@@ -29,7 +29,7 @@ public class ChatUAIClient
     public async Task<ApiResult<AskResponse>> AskAsync(AskRequest request)
     {
         using var client = new HttpClient();
-        client.Timeout = TimeSpan.FromSeconds(10);
+        client.Timeout = TimeSpan.FromSeconds(300); 
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
@@ -58,6 +58,8 @@ public class ChatUAIClient
     public async Task<ApiResult<StreamResponse>> StreamCreateAsync(StreamCreateRequest request)
     {
         using var client = new HttpClient();
+
+        client.Timeout = TimeSpan.FromSeconds(300);
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
@@ -87,6 +89,8 @@ public class ChatUAIClient
     public async IAsyncEnumerable<string> StreamAsync(Guid streamId)
     {
         using var client = new HttpClient();
+
+        client.Timeout = TimeSpan.FromSeconds(300);
         var url = $"{_baseUrl}/chat/stream?streamId={streamId}";
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
 
@@ -131,6 +135,8 @@ public class ChatUAIClient
     public async Task<ApiResult<SyncResponse>> SyncAsync(Guid streamId)
     {
         using var client = new HttpClient();
+
+        client.Timeout = TimeSpan.FromSeconds(300);
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
@@ -150,7 +156,7 @@ public class ChatUAIClient
     public async Task<ApiResult<CreateImageResponse>> CreateImageAsync(CreateImageRequest request)
     {
         using var client = new HttpClient();
-        client.Timeout = TimeSpan.FromSeconds(15);
+        client.Timeout = TimeSpan.FromSeconds(150);
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,
@@ -173,7 +179,7 @@ public class ChatUAIClient
     public async Task<ApiResult<CheckResultResponse>> CheckResultAsync(CheckResultRequest request)
     {
         using var client = new HttpClient();
-        client.Timeout = TimeSpan.FromSeconds(15);
+        client.Timeout = TimeSpan.FromSeconds(150);
         var json = JsonConvert.SerializeObject(new
         {
             accessToken = _accessToken,

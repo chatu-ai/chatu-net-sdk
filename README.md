@@ -9,14 +9,15 @@ If you use SDK, you can install it via NuGet: `ChatU.AI.SDK`
 Or execute the command
 
 ```ps
-Install-Package ChatU.AI.SDK -Version 1.1.2
+Install-Package ChatU.AI.SDK -Version 1.2.4
 ```
 ```ps
-dotnet add package ChatU.AI.SDK --version 1.1.2
+dotnet add package ChatU.AI.SDK --version 1.2.4
 ```
 
 ## Release Notes
 
+- [x] Support .NET 8.0 & .NET 9.0
 - [x] Image generation interface
 - [x] Text generation interface
 - [x] Streaming text generation interface

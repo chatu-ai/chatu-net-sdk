@@ -50,6 +50,7 @@ public class ChatUAIClient
         return JsonConvert.DeserializeObject<ApiResult<AskResponse>>(text);
     }
 
+
     /// <summary>
     ///     Create a stream input request
     /// </summary>

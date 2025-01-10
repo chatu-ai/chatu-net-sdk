@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ChatU.AI.SDK" Version="1.1.2" />
+    <ProjectReference Include="..\ChatUAISDK\ChatUAISDK.csproj" />
   </ItemGroup>
 
 </Project>

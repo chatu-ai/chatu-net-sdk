@@ -65,4 +65,6 @@ public class AskRequest
     ///     Assistant ID
     /// </summary>
     public Guid? AssistantId { get; set; }
+
+    public int? HistoryLength { get; set; } 
 }

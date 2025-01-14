@@ -62,4 +62,7 @@ public class StreamCreateRequest
     ///     使用的AI助手ID
     /// </summary>
     public Guid? AssistantId { get; set; }
+
+
+    public int? HistoryLength { get; set; }
 }
